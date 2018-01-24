@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Block Transations</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script language="JavaScript">
+        // Now call the function we defined above
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/othcoin/blocks",
+            success: function(result) {
+                console.log(result);
+                result.forEach(function(item){
+                    $("#blocks").append("<tr>\n" +
+                        "                <td>"+item.createAt+"</td>\n" +
+                        "                <td>"+item.from+"</td>\n" +
+                        "                <td>"+item.to+"</td>\n" +
+                        "                <td>"+item.value+"</td>\n" +
+                        "            </tr>")
+                })
+            }
+        });
+    </script>
+</head>
+
+<body>
+	<header>
+        <h1>OathCoin</h1>
+    </header>
+
+    <div class="topnav">
+        <a href="blocks.html">Blocks</a>
+    </div>
+
+    <div class="content">
+    	<h2>Block 2 Transcations</h2>
+    <div>
+        <table class="table table-striped" id="blocks">
+            <tr>
+                <th>Time</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Coins</th>
+            </tr>
+
+            <tr>
+                <td>01/23/2018 3:54PM</td>
+                <td>0805eef279c336eaac18b6d8b43717aa6cc5e4f3808cfe949cb8d4f2e7b0ae3d</td>
+                <td>4ac1c091ce36b1c57e3c075443d3a8b0504d282079bb5a7944d7a2f3560a5f07</td>
+                <td>10</td>
+            </tr>
+
+            <tr>
+                <td>01/23/2018 3:56PM</td>
+                <td>9d1201a32b9c75ae55105fe86325be4f934af1f6c1848d98dcbcc67f2c822c28</td>
+                <td>4ac1c091ce36b1c57e3c075443d3a8b0504d282079bb5a7944d7a2f3560a5f07</td>
+                <td>5</td>
+            </tr>
+
+            <tr>
+                <td>01/23/2018 4:02PM</td>
+                <td>4ac1c091ce36b1c57e3c075443d3a8b0504d282079bb5a7944d7a2f3560a5f07</td>
+                <td>98f1f4266e1b43e023b0fdecdd5f4098a6348a7754082910a188c9d66c5f2cb9</td>
+                <td>7</td>
+            </tr>
+        </table>
+    </div>
+</body>

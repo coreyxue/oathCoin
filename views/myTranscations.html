@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Transations</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script language="JavaScript">
+        // Now call the function we defined above
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/othcoin/transactions",
+            success: function(result) {
+                console.log(result);
+                result.forEach(function(item){
+                    $("#blocks").append("<tr>\n" +
+                        "                <td>"+item.createAt+"</td>\n" +
+                        "                <td>"+item.from+"</td>\n" +
+                        "                <td>"+item.to+"</td>\n" +
+                        "                <td>"+item.value+"</td>\n" +
+                        "            </tr>")
+                })
+            }
+        });
+    </script>
+</head>
+
+<body>
+	<header>
+        <h1>OathCoin</h1>
+    </header>
+
+    <div class="topnav">
+        <a href="wallet.html">My Wallet</a>
+        <a href="myTranscations.html">My Transcations</a>
+        <a href="sent.html">Send Coins</a>
+    </div>
+
+    <div class="content">
+    	<h2>My Transcations</h2>
+        <table class="table table-striped" id="blocks">
+            <tr>
+                <th>Time</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Coins</th>
+            </tr>
+        </table>
+    </div>
+</body>

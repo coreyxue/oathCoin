@@ -8,6 +8,12 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
+app.use('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/myapp');
 
@@ -23,6 +29,7 @@ var cron = require('node-cron');
 var Task = require('./controllers/cronjob');
 
 var task = cron.schedule('*/10 * * * * *', function() {
+
     console.log('run every */? seconds');
     Task.task();
 }, false);

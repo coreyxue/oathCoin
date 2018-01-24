@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sent Coins</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+	<header>
+        <h1>OathCoin</h1>
+    </header>
+
+    <div class="topnav">
+        <a href="wallet.html">My Wallet</a>
+        <a href="myTranscations.html">My Transcations</a>
+        <a href="sent.html">Send Coins</a>
+    </div>
+
+    <div class="content">
+    	<h2>Send Coins</h2>
+        <table>
+            <tr>
+                <th>Receiver:</th>
+                <td>
+                    <select id="to">
+                        <option>0805eef279c336eaac18b6d8b43717aa6cc5e4f3808cfe949cb8d4f2e7b0ae3d</option>
+                        <option>9d1201a32b9c75ae55105fe86325be4f934af1f6c1848d98dcbcc67f2c822c28</option>
+                        <option>98f1f4266e1b43e023b0fdecdd5f4098a6348a7754082910a188c9d66c5f2cb9</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Coins (OTC):</th>
+                <td>
+                    <form>
+                    <p>
+                        <input type="number" id="value">
+                    </p>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <button id="send">Submit</button>
+    </div>
+    <script language="JavaScript">
+        // Now call the function we defined above
+        $("document").ready(function () {
+            $("#send").click(function () {
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        "from":"0805eef279c336eaac18b6d8b43717aa6cc5e4f3808cfe949cb8d4f2e7b0ae3d",
+                        "to":$("#to").val(),
+                        "value":$("#value").val()
+                    },
+                    url: "http://localhost:3000/othcoin/transactions",
+                    success: function(result) {
+                        console.log(result);
+                    }
+                });
+            })
+        })
+
+
+    </script>
+</body>

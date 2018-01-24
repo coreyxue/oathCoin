@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blocks</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script language="JavaScript">
+        // Now call the function we defined above
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:3000/othcoin/blocks",
+            success: function(result) {
+                console.log(result);
+                result.forEach(function(item){
+                    $("#blocks").append("<tr>\n" +
+                        "                <td>"+item.height+"</td>\n" +
+                        "                <td>"+item.transactions.length+"</td>\n" +
+                        "                <td>"+item.totalSpend+"</td>\n" +
+                        "            </tr>")
+                })
+            }
+        });
+    </script>
+</head>
+
+<body>
+	<header>
+        <h1>OathCoin</h1>
+    </header>
+
+    <div class="topnav">
+        <a href="blocks.html">Blocks</a>
+    </div>
+
+    <div class="content">
+    	<h2>Blocks</h2>
+    <div>
+        <table class="table table-striped" id="blocks">
+            <tr>
+                <th>Height</th>
+                <th>Transcations</th>
+                <th>Total Spent</th>
+            </tr>
+
+            <!--tr>
+                <td><a href="blockTranscations.html">2</a></td>
+                <td>3</td>
+                <td>22</td>
+            </tr>
+
+            <tr>
+                <td><a href="blockTranscations.html">1</a></td>
+                <td>1</td>
+                <td>50</td>
+            </tr-->
+        </table>
+    </div>
+</body>

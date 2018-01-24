@@ -12,7 +12,7 @@ async function task() {
 
         var query = {
             createAt: { // 10 minutes ago (from now)
-                $gt: new Date(Date.now() - 1000 * 60 * 10)
+                $gt: new Date(Date.now() - 1000 * 9)
             }
         };
         var block = Block();

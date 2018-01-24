@@ -22,7 +22,7 @@ var cron = require('node-cron');
 
 var Task = require('./controllers/cronjob');
 
-var task = cron.schedule('*/2 * * * * *', function() {
+var task = cron.schedule('*/10 * * * * *', function() {
     console.log('run every */? seconds');
     Task.task();
 }, false);

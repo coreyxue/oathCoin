@@ -20,8 +20,11 @@ var port = 3000;        // set our port
 
 var cron = require('node-cron');
 
-var task = cron.schedule('1 * * * * *', function() {
-    console.log('immediately started');
+var Task = require('./controllers/cronjob');
+
+var task = cron.schedule('*/2 * * * * *', function() {
+    console.log('run every */? seconds');
+    Task.task();
 }, false);
 
 task.start();

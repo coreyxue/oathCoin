@@ -1,14 +1,22 @@
-var Block = require('../models/block');
 var Transaction = require('../models/transaction');
+var Block = require('../models/block');
 
-async function create(req, res, next) {
+async function task() {
+
     try {
+        var tran = new Transaction();
+        tran.from = "";
+        tran.to = "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123";
+        tran.value = 50;
+        await tran.save();
+
         var query = {
             createAt: { // 10 minutes ago (from now)
                 $gt: new Date(Date.now() - 1000 * 60 * 10)
             }
         };
         var block = Block();
+
         var transactions = await Transaction.find(query).exec();
 
         var totalSpend = 0.0;
@@ -17,25 +25,17 @@ async function create(req, res, next) {
             transIds.push(tran._id);
             totalSpend += tran.value;
         });
+        var currentHeight = await Block.count().exec();
         block.transactions = transIds;
         block.totalSpend = totalSpend;
-        await block.save();
-        return res.status(200).json({description: "Block created", transactions});
-    } catch (err) {
-        next(err);
-    }
-}
+        block.height = currentHeight + 1;
 
-async function list(req,res, next) {
-    try{
-        var blocks = await Block.find().exec();
-        return res.json(blocks);
+        await block.save();
     } catch (err) {
-        next(err);
+        console.log(err);
     }
 }
 
 module.exports = {
-    create,
-    list
+    task
 };
